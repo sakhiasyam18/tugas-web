@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pengumpulan Data Diri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #kirimBtn {
+            background-color: #28a745;
+            color: white;
+        }
+        #lihatBtn {
+            background-color: #6c757d;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #dataTable {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Form Pengumpulan Data Diri</h2>
+        <form id="dataForm">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" required>
+            
+            <label for="nisn">NISN</label>
+            <input type="text" id="nisn" required>
+            
+            <label for="kelas">Kelas</label>
+            <input type="text" id="kelas" required>
+            
+            <label for="tanggalLahir">Tanggal Lahir</label>
+            <input type="date" id="tanggalLahir" required>
+            
+            <label for="alamat">Alamat</label>
+            <input type="text" id="alamat" required>
+            
+            <label for="nomorTelepon">Nomor Telepon/HP</label>
+            <input type="text" id="nomorTelepon" required>
+            
+            <div class="buttons">
+                <button type="submit" id="kirimBtn">Kirim Data</button>
+                <button type="button" id="lihatBtn">Lihat Data</button>
+            </div>
+        </form>
+
+        <div id="dataTable">
+            <h2>Data Peserta Didik</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Lengkap</th>
+                        <th>NISN</th>
+                        <th>Kelas</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Alamat</th>
+                        <th>Nomor Telepon</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
