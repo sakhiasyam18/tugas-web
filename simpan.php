@@ -1,4 +1,3 @@
-<!-- simpan.php -->
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -39,4 +38,3 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
-?>
