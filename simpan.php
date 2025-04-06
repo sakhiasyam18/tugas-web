@@ -1,5 +1,9 @@
 <!-- simpan.php -->
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 header('Content-Type: application/json');
 
 // Koneksi ke database
@@ -23,23 +27,16 @@ $tanggal_lahir = $_POST['tanggal_lahir'];
 $alamat = $_POST['alamat'];
 $nomor_telepon = $_POST['nomor_telepon'];
 
-// Sanitasi input (untuk keamanan)
-$nama = $conn->real_escape_string($nama);
-$nisn = $conn->real_escape_string($nisn);
-$kelas = $conn->real_escape_string($kelas);
-$tanggal_lahir = $conn->real_escape_string($tanggal_lahir);
-$alamat = $conn->real_escape_string($alamat);
-$nomor_telepon = $conn->real_escape_string($nomor_telepon);
+// Gunakan prepared statement untuk keamanan
+$stmt = $conn->prepare("INSERT INTO siswa (nama, nisn, kelas, tanggal_lahir, alamat, nomor_telepon) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssss", $nama, $nisn, $kelas, $tanggal_lahir, $alamat, $nomor_telepon);
 
-// Query untuk menyimpan data
-$sql = "INSERT INTO siswa (nama, nisn, kelas, tanggal_lahir, alamat, nomor_telepon) 
-        VALUES ('$nama', '$nisn', '$kelas', '$tanggal_lahir', '$alamat', '$nomor_telepon')";
-
-if ($conn->query($sql) === TRUE) {
+if ($stmt->execute()) {
     echo json_encode(['success' => true, 'message' => 'Data berhasil disimpan']);
 } else {
     echo json_encode(['success' => false, 'message' => 'Error: ' . $conn->error]);
 }
 
+$stmt->close();
 $conn->close();
 ?>
