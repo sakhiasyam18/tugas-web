@@ -2,51 +2,13 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-//ini bagian file simpan.php (tidak ada) jadi aku milih jadikan satu dengan disini
-// Koneksi ke database
-$host = "localhost";
-$user = "root";
-$password = "";
-$database = "punyaku";
 
-$conn = new mysqli($host, $user, $password, $database);
-
+$conn = new mysqli("localhost", "root", "", "final");
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Proses simpan data jika ada POST request
-// atau istilah nya ambil data dari from 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('Content-Type: application/json');
-    $nama = $_POST['nama'];
-    $nisn = $_POST['nisn'];
-    $kelas = $_POST['kelas'];
-    $tanggal_lahir = $_POST['tanggal_lahir'];
-    $alamat = $_POST['alamat'];
-    $nomor_telepon = $_POST['nomor_telepon'];
-
-    //ini buat keamanan aja sih alias buat hindari dari sql injection aja 
-    // $stmt = $conn->prepare("INSERT INTO siswa (nama, nisn, kelas, tanggal_lahir, alamat, nomor_telepon) VALUES (?, ?, ?, ?, ?, ?)");
-    // $stmt->bind_param("ssssss", $nama, $nisn, $kelas, $tanggal_lahir, $alamat, $nomor_telepon);
-
-    //itu ilmu baru aja sih, jadi kalau nggak pakai ya default nya kek gini 
-    $sql = "INSERT INTO siswa (nama, nisn, kelas, tanggal_lahir, alamat, nomor_telepon) 
-        VALUES ('$nama', '$nisn', '$kelas', '$tanggal_lahir', '$alamat', '$nomor_telepon')";
-    $conn->query($sql);
-
-    if ($conn->query($sql)) {
-        echo json_encode(['success' => true, 'message' => 'Data berhasil disimpan']);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Error: ' . $conn->error]);
-    }
-    //ini lanjutan nya kalau makai yang tadi
-    // $sql->close();
-    // $conn->close();
-    exit();
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="id">
