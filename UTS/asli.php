@@ -12,7 +12,7 @@ error_reporting(E_ALL);
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bookshelf App</title>
-    <style>
+    <!-- <style>
         .form {
             margin: 0;
             padding: 0;
@@ -42,7 +42,7 @@ error_reporting(E_ALL);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
             overflow-y: auto;
             max-height: 90vh;
-        }
+        } -->
     </style>
 
     <!-- Impor script -->
@@ -102,54 +102,54 @@ error_reporting(E_ALL);
         </section>
     </main>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("bookForm").addEventListener("submit", function(e) {
-                e.preventDefault();
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("bookForm").addEventListener("submit", function(e) {
+            e.preventDefault();
 
-                const id = document.getElementById("id").value.trim();
-                const nisn = document.getElementById("judul").value.trim();
-                const tabun_terbit = document.getElementById("tahun_terbit").value;
-                const alamat = document.getElementById("pengarang").value.trim();
-                const nomorTelepon = document.getElementById("nomor-telepon").value.trim();
-                const formData = new FormData();
-                formData.append("id", id);
-                formData.append("judul", judul);
-                formData.append("tahun_terbit", tahun_terbit);
-                formData.append("pengarang", pengarang);
-                formData.append("kategori", kategori);
+            const id = document.getElementById("id").value.trim();
+            const nisn = document.getElementById("judul").value.trim();
+            const tabun_terbit = document.getElementById("tahun_terbit").value;
+            const alamat = document.getElementById("pengarang").value.trim();
+            const nomorTelepon = document.getElementById("nomor-telepon").value.trim();
+            const formData = new FormData();
+            formData.append("id", id);
+            formData.append("judul", judul);
+            formData.append("tahun_terbit", tahun_terbit);
+            formData.append("pengarang", pengarang);
+            formData.append("kategori", kategori);
 
-                if (!judul || !Penulis || !tabun_terbit || !alamat || !nomorTelepon) {
-                    alert("Semua field harus diisi!");
-                    return;
-                }
-                if (!/^\d+$/.test(nisn)) {
-                    alert("NISN harus berupa angka!");
-                    return;
-                }
-                if (!/^\d+$/.test(nomorTelepon)) {
-                    alert("Nomor Telepon harus berupa angka!");
-                    return;
-                }
+            if (!judul || !Penulis || !tabun_terbit || !alamat || !nomorTelepon) {
+                alert("Semua field harus diisi!");
+                return;
+            }
+            if (!/^\d+$/.test(nisn)) {
+                alert("NISN harus berupa angka!");
+                return;
+            }
+            if (!/^\d+$/.test(nomorTelepon)) {
+                alert("Nomor Telepon harus berupa angka!");
+                return;
+            }
 
-                fetch("2data.php", {
-                        method: "POST",
-                        body: formData,
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.success) {
-                            alert("Data berhasil disimpan!");
-                            document.getElementById("dataForm").reset();
-                        } else {
-                            alert("Gagal menyimpan data: " + data.message);
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error:", error);
-                        alert("Terjadi kesalahan saat mengirim data.");
-                    });
-            });
+            fetch("2data.php", {
+                    method: "POST",
+                    body: formData,
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        alert("Data berhasil disimpan!");
+                        document.getElementById("dataForm").reset();
+                    } else {
+                        alert("Gagal menyimpan data: " + data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("Terjadi kesalahan saat mengirim data.");
+                });
         });
+    });
     </script>
 </body>
 

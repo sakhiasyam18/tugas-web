@@ -12,8 +12,8 @@ error_reporting(E_ALL);
     <title>Form Pengumpulan Data Diri</title>
     <style>
     body {
-        background: linear-gradient(to bottom right, #a1c4fd, #c2e9fb);
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #a1c4fd, #c2e9fb);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -22,130 +22,121 @@ error_reporting(E_ALL);
     }
 
     .container {
-        background-color: white;
+        background: white;
         padding: 20px;
-        border-radius: 18px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        max-width: 500px;
-        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
     }
 
-    h1 {
+    h2 {
         text-align: center;
-        font-size: 24px;
-        margin-bottom: 20px;
-        color: #000000;
     }
 
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        margin-bottom: 15px;
+    label {
+        display: block;
+        margin: 10px 0 5px;
     }
 
-    .form-group label {
-        font-size: 16px;
-        color: #333;
-    }
-
-    .form-group input[type="text"],
-    .form-group input[type="tel"],
-    .form-group input[type="date"],
-    .form-group select,
-    .form-group textarea {
+    select,
+    input,
+    textarea {
         width: 100%;
         padding: 8px;
-        font-size: 14px;
+        margin-bottom: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
         box-sizing: border-box;
+        font-size: 14px;
     }
 
-    .form-group textarea {
-        height: 80px;
+    textarea {
+        min-height: 80px;
         resize: vertical;
     }
 
     .buttons {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 20px;
+        justify-content: space-between;
     }
 
-    .buttons input[type="submit"],
-    .buttons button {
-        width: 100%;
-        padding: 10px;
+    button {
+        padding: 10px 20px;
         border: none;
         border-radius: 5px;
-        font-size: 16px;
         cursor: pointer;
     }
 
-    .buttons input[type="submit"] {
+    #kirimBtn {
         background-color: #28a745;
         color: white;
     }
 
-    .buttons input[type="submit"]:hover {
+    #kirimBtn:hover {
         background-color: #218838;
     }
 
-    .buttons button {
+    #lihatBtn {
         background-color: #6c757d;
         color: white;
     }
 
-    .buttons button:hover {
+    #lihatBtn:hover {
         background-color: #5a6268;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
     }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Form Pengumpulan Data Diri</h1>
+        <h2>Form Pengumpulan Data Diri</h2>
         <form id="dataForm">
-            <div class="form-group">
-                <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" name="nama" required>
-            </div>
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" required>
 
-            <div class="form-group">
-                <label for="nisn">NISN</label>
-                <input type="text" id="nisn" name="nisn" required>
-            </div>
+            <label for="nisn">NISN</label>
+            <input type="text" id="nisn" name="nisn" required>
 
-            <div class="form-group">
-                <label for="kelas">Kelas</label>
-                <select id="kelas" name="kelas" required>
-                    <option value="" disabled selected>Pilih Kelas</option>
-                    <option value="10">Kelas 10</option>
-                    <option value="11">Kelas 11</option>
-                    <option value="12">Kelas 12</option>
-                </select>
-            </div>
+            <label for="kelas">Kelas</label>
+            <select id="kelas" name="kelas" required>
+                <option value="" disabled selected>Pilih Kelas</option>
+                <option value="10">Kelas 10</option>
+                <option value="11">Kelas 11</option>
+                <option value="12">Kelas 12</option>
+            </select>
 
-            <div class="form-group">
-                <label for="tanggal-lahir">Tanggal Lahir</label>
-                <input type="date" id="tanggal-lahir" name="tanggal_lahir" required>
-            </div>
+            <label for="tanggal_lahir">Tanggal Lahir</label>
+            <input type="date" id="tanggal_lahir" name="tanggal_lahir" required>
 
-            <div class="form-group">
-                <label for="alamat">Alamat</label>
-                <textarea id="alamat" name="alamat" required></textarea>
-            </div>
+            <label for="alamat">Alamat</label>
+            <textarea id="alamat" name="alamat" required> </textarea>
 
-            <div class="form-group">
-                <label for="nomor-telepon">Nomor Telepon/HP</label>
-                <input type="tel" id="nomor-telepon" name="nomor_telepon" required>
-            </div>
+            <label for="nomor_telepon">Nomor Telepon/HP</label>
+            <input type="text" id="nomor_telepon" name="nomor_telepon" required>
 
             <div class="buttons">
-                <input type="submit" value="Kirim Data">
-                <a href="2data.php"><button type="button">Lihat Data</button></a>
+                <button type="submit" id="kirimBtn">Kirim Data</button>
+                <a href="2data.php"><button type="button" id="lihatBtn">Lihat Data</button></a>
             </div>
         </form>
+    </div>
     </div>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -155,9 +146,25 @@ error_reporting(E_ALL);
             const nama = document.getElementById("nama").value.trim();
             const nisn = document.getElementById("nisn").value.trim();
             const kelas = document.getElementById("kelas").value.trim();
-            const tanggalLahir = document.getElementById("tanggal-lahir").value;
+            const tanggalLahir = document.getElementById("tanggal_lahir").value;
             const alamat = document.getElementById("alamat").value.trim();
-            const nomorTelepon = document.getElementById("nomor-telepon").value.trim();
+            const nomorTelepon = document.getElementById("nomor_telepon").value.trim();
+
+            if (!nama || !nisn || !kelas || !tanggalLahir || !alamat || !nomorTelepon) {
+                alert("Semua field harus diisi!");
+                return;
+            }
+
+            if (!/^\d+$/.test(nisn)) {
+                alert("NISN harus berupa angka!");
+                return;
+            }
+
+            if (!/^\d+$/.test(nomorTelepon)) {
+                alert("Nomor Telepon harus berupa angka!");
+                return;
+            }
+
             const formData = new FormData();
             formData.append("nama", nama);
             formData.append("nisn", nisn);
@@ -165,19 +172,6 @@ error_reporting(E_ALL);
             formData.append("tanggal_lahir", tanggalLahir);
             formData.append("alamat", alamat);
             formData.append("nomor_telepon", nomorTelepon);
-
-            if (!nama || !nisn || !kelas || !tanggalLahir || !alamat || !nomorTelepon) {
-                alert("Semua field harus diisi!");
-                return;
-            }
-            if (!/^\d+$/.test(nisn)) {
-                alert("NISN harus berupa angka!");
-                return;
-            }
-            if (!/^\d+$/.test(nomorTelepon)) {
-                alert("Nomor Telepon harus berupa angka!");
-                return;
-            }
 
             fetch("2data.php", {
                     method: "POST",

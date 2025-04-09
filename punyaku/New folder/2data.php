@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-//ini bagian file simpan.php (tidak ada) jadi aku milih jadikan satu dengan disini
+
 // Koneksi ke database
 $host = "localhost";
 $user = "root";
@@ -16,7 +16,6 @@ if ($conn->connect_error) {
 }
 
 // Proses simpan data jika ada POST request
-// atau istilah nya ambil data dari from 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
     $nama = $_POST['nama'];
@@ -26,27 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $alamat = $_POST['alamat'];
     $nomor_telepon = $_POST['nomor_telepon'];
 
-    //ini buat keamanan aja sih alias buat hindari dari sql injection aja 
-    // $stmt = $conn->prepare("INSERT INTO siswa (nama, nisn, kelas, tanggal_lahir, alamat, nomor_telepon) VALUES (?, ?, ?, ?, ?, ?)");
-    // $stmt->bind_param("ssssss", $nama, $nisn, $kelas, $tanggal_lahir, $alamat, $nomor_telepon);
+    $stmt = $conn->prepare("INSERT INTO siswa (nama, nisn, kelas, tanggal_lahir, alamat, nomor_telepon) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $nama, $nisn, $kelas, $tanggal_lahir, $alamat, $nomor_telepon);
 
-    //itu ilmu baru aja sih, jadi kalau nggak pakai ya default nya kek gini 
-    $sql = "INSERT INTO siswa (nama, nisn, kelas, tanggal_lahir, alamat, nomor_telepon) 
-        VALUES ('$nama', '$nisn', '$kelas', '$tanggal_lahir', '$alamat', '$nomor_telepon')";
-    $conn->query($sql);
-
-    if ($conn->query($sql)) {
+    if ($stmt->execute()) {
         echo json_encode(['success' => true, 'message' => 'Data berhasil disimpan']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Error: ' . $conn->error]);
     }
-    //ini lanjutan nya kalau makai yang tadi
-    // $sql->close();
-    // $conn->close();
+
+    $stmt->close();
+    $conn->close();
     exit();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="id">
@@ -56,44 +48,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Peserta Didik</title>
     <style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: center;
-    }
-
-    th {
-        background-color: rgb(0, 180, 60);
-        color: white;
-        padding: 8px;
-        font-weight: bold;
-        font-size: large;
-    }
-
-    .buttons {
+        /* body {
+        background: linear-gradient(to bottom right, #a1c4fd, #c2e9fb);
+        font-family: Arial, Helvetica, sans-serif;
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
     }
 
-    button {
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        background-color: #6c757d;
-        color: white;
-    }
+    .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 18px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 100%;
+    } */
 
-    button:hover {
-        background-color: #ccc;
-    }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgb(0, 180, 60);
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .buttons button:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 
@@ -114,8 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </thead>
             <tbody>
                 <?php
-                // kalau dipisah itu kan ada koneksi ke database dulu, namun kalau punyaku ini aku gabungin jadi satu file sehingga langsung aja ke ambil data dari table database siswa
-                //ini bagian ambil data dari table siswa yang sudah di buat di databasenya
                 $sql = "SELECT * FROM siswa";
                 $result = $conn->query($sql);
 

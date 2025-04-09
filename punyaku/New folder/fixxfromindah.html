@@ -1,0 +1,128 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, 
+initial-scale=1.0"> 
+    <title>Isi data sendiri</title> 
+    <!-- <style>
+        body{
+            background: linear-gradient(to bottom right, #a1c4fd, #c2e9fb);
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container{
+            background-color: white;
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 2px 10px rgb(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            
+        }
+        
+        h1{
+            text-align: center;
+            font-size: 24px;
+            margin-bottom:20px;
+            color: #000000;
+        }
+
+        #datasiswa {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #datasiswa label{
+            font-size: 16px;
+            color: #333;
+        }
+
+        #datasiswa input[type="text"],
+        #datasiswa input[type="number"],
+        #datasiswa input[type="date"],
+        #datasiswa select,
+        #datasiswa textarea{
+            padding: 8px;
+            font-size: 14px;
+            font-size: border-box;
+        }
+
+        #datasiswa textarea{
+            height: 80px;
+            resize: vertical;
+        }
+
+        .submit button[type="submit"]{
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .submit button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .file{
+            flex-direction: column;
+            display: flex;
+            border: 1pt solid;
+        }
+    </style> -->
+</head> 
+
+<body> 
+    <div class="container"> 
+        <h1>Form Pengumpulan Data Diri yang ada PHP nya</h1>
+        <form id="datasiswa">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" required>
+
+            <label for="NISN">NIS / NISN</label>
+            <input type="text" id="NISN" name="NISN" required>
+
+            <label for="Kelas">Kelas:</label>
+            <select id="Kelas" name="Kelas" required>
+                <option value="pilih-kelas">Pilih Kelas</option>
+                <option value="1">Kelas 10</option>
+                <option value="1">Kelas 11</option>
+                <option value="2">Kelas 12</option>
+            </select>
+
+            <label for="tanggal">Tanggal lahir:</label>
+            <input type="date" id="tanggal" name="tanggal" required>
+
+            <label for="alamat">Alamat:</label>
+            <textarea id="alamat" name="alamat" required></textarea>
+
+            <label for="telepon">Nomor Telepon/HP</label>
+            <input type="number" id="telepon" name="telepon" required>
+
+            <!-- <label for="file">Upload foto (JPG dan PNG)</label>
+            <div class="file">
+                <input type="file" id="file" name="file" required>
+            </div> -->
+
+            <div class="submit">
+                <input type="submit" value="Kirim Data">
+                <a href="data.php"><button type="button" id="lihatBtn">Lihat Data</button></a>
+            </div>
+
+        </form>
+    </div>
+</body> 
+
+</html> 
+<!-- filename:fromindah.html -->
